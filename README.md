@@ -3,6 +3,7 @@
 ## Description
 * This script is for my company's web authorization to access to Internet.
 * Currently this script only support Linux and MacOSX.
+* Only support bash
 
 ##Usage
 
