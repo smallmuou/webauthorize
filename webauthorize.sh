@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Copyright (C) 2014 Wenva <lvyexuwenfa100@126.com>
 # 
@@ -146,6 +146,10 @@ if [ "$LOGIN" == 0 ]; then
     info "Send successed. For now, you need to check whether it by manual."
 else #Login
     info "Trying to authorizing with username $USERNAME and ip $IP"
+
+    # 先尝试连接一次baidu，以保证成功率
+    `curl www.baidu.com > /dev/null`
+
     RESPONSE=`curl -d "kind=preLogin&userIp=$IP&nasIp=10.10.30.1&userId=$USERNAME&password=$PASSWORD" "http://192.168.9.19/smp/webauthservlet"`
     if [ "$RESPONSE" == "" ]; then
         info "Authorize successed. Now you can access to Internet."
