@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2014 Wenva <lvyexuwenfa100@126.com>
 # 
@@ -53,22 +53,27 @@ EXAMPLE:
 Login:
     $0 -a username:password
     $0 -a username:password -i eth0
-    $0 -a username:password -p userip
+    $0 -a username:password -p yourip
 Logout:
     $0
-    $0 -p userip
+    $0 -p yourip
 
 Note: For now this command only support Linux and MacOSX.
 EOF
 }
 
-# Main
 show_usage() {
     usage
     exit -1
 }
 
+# Main
+
 LOGIN=0
+
+if [ `uname` == "Darwin" ]; then
+    ISMAXOSX=1
+fi
 
 # parse arguments
 while getopts "a:i:p:hv" OPTION
@@ -92,13 +97,7 @@ do
         IP=$OPTARG
         ;;
     i)
-        if [ "$IP" == "" ]; then
-            IP=`ifconfig $OPTARG|awk '/inet /{print $2}'`
-            if [ "$IP" == "" ]; then
-                error "The interface $OPTARG doesn't exist."
-                exit -1
-            fi
-        fi
+        INTERFACE=$OPTARG
         ;;
     h)
         show_usage
@@ -114,18 +113,31 @@ do
     esac
 done
 
+        if [ "$IP" == "" ]; then
+            IP=`ifconfig $OPTARG|awk '/inet /{print $2}'`
+            if [ "$IP" == "" ]; then
+                error "The interface $OPTARG doesn't exist."
+                exit -1
+            fi
+        fi
 # if not assign ip, get default ip
 if [ "$IP" == "" ]; then
 
-    # default interface
-    OS=`uname`
-    if [ "$OS" == "Darwin" ]; then
-        INTERFACE="en0"
-    elif [ "$OS" == "Linux" ]; then
-        INTERFACE="eth0"
+    if [ "$INTERFACE" == "" ]; then
+        # default interface
+        if [ "$ISMAXOSX" == 1 ]; then
+            INTERFACE="en0"
+        else
+            INTERFACE="eth0"
+        fi
     fi
 
+    if [ "$ISMAXOSX" == 1 ]; then
     IP=`ifconfig $INTERFACE|awk '/inet /{print $2}'`
+    else 
+    IP=`fconfig eth1|awk '/inet /{print $2}'|awk -F: '{print $2}'`
+    fi
+
     if [ "$IP" == "" ]; then
         error "Can't obtain ip for authorize. Please assign ip by -p."
         exit -1
