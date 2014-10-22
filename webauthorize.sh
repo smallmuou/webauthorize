@@ -128,9 +128,9 @@ if [ "$IP" == "" ]; then
     fi
 
     if [ "$ISMAXOSX" == 1 ]; then
-    IP=`ifconfig $INTERFACE|awk '/inet /{print $2}'`
+        IP=`ifconfig $INTERFACE|awk '/inet /{print $2}'`
     else 
-    IP=`fconfig eth1|awk '/inet /{print $2}'|awk -F: '{print $2}'`
+        IP=`ifconfig $INTERFACE|awk '/inet /{print $2}'|awk -F: '{print $2}'`
     fi
 
     if [ "$IP" == "" ]; then
