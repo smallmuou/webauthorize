@@ -115,13 +115,6 @@ do
     esac
 done
 
-        if [ "$IP" == "" ]; then
-            IP=`ifconfig $OPTARG|awk '/inet /{print $2}'`
-            if [ "$IP" == "" ]; then
-                error "The interface $OPTARG doesn't exist."
-                exit -1
-            fi
-        fi
 # if not assign ip, get default ip
 if [ "$IP" == "" ]; then
 
