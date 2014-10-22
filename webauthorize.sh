@@ -25,15 +25,17 @@ set -e
 VERSION=1.0.0
 
 info() {
-     local green="\033[1;32m"
-     local normal="\033[0m"
-     echo "[${green}INFO${normal}] $1"
+#     local green="\033[1;32m"
+#     local normal="\033[0m"
+#     echo "[${green}INFO${normal}] $1"
+      echo "[INFO] $1"
 }
 
 error() {
-     local red="\033[1;31m"
-     local normal="\033[0m"
-     echo "[${red}ERROR${normal}] $1"
+#     local red="\033[1;31m"
+#     local normal="\033[0m"
+#     echo "[${red}ERROR${normal}] $1"
+      echo "[INFO] $1"
 }
 
 usage() {
