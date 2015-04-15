@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Copyright (C) 2014 Wenva <lvyexuwenfa100@126.com>
 # 
@@ -22,20 +22,18 @@
 
 set -e
 
-VERSION=1.0.0
+VERSION=1.0.1
 
 info() {
-#     local green="\033[1;32m"
-#     local normal="\033[0m"
-#     echo "[${green}INFO${normal}] $1"
-      echo "[INFO] $1"
+     local green="\033[1;32m"
+     local normal="\033[0m"
+     echo "[${green}INFO${normal}] $1"
 }
 
 error() {
-#     local red="\033[1;31m"
-#     local normal="\033[0m"
-#     echo "[${red}ERROR${normal}] $1"
-      echo "[INFO] $1"
+     local red="\033[1;31m"
+     local normal="\033[0m"
+     echo "[${red}ERROR${normal}] $1"
 }
 
 usage() {
@@ -149,8 +147,9 @@ else #Login
 
     # 先尝试连接一次baidu，以保证成功率
     `curl www.baidu.com > /dev/null`
+    `curl -d "kind=toRedirection&urlBeforeLogin=&loginUrl=commonauth" "http://192.168.9.19/smp/webauthservlet" > /dev/null`
 
-    RESPONSE=`curl -d "kind=preLogin&userIp=$IP&nasIp=10.10.30.1&userId=$USERNAME&password=$PASSWORD" "http://192.168.9.19/smp/webauthservlet"`
+    RESPONSE=`curl -d "kind=preLogin&userIp=$IP&nasIp=192.168.19.2&userId=$USERNAME&password=$PASSWORD" "http://192.168.9.19/smp/webauthservlet"`
     if [ "$RESPONSE" == "" ]; then
         info "Authorize successed. Now you can access to Internet."
     else
