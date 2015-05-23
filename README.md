@@ -17,3 +17,19 @@
     * ./webauthorize.sh
     * ./webauthorize.sh -p userip
     
+## Note
+The latest web site use rsa. You need use [jssh](https://github.com/smallmuou/jssh) to generator password.
+1. edit password-generator.js
+<pre>
+...
+var str = encryptedPwd("<password>");
+print (str);
+</pre>
+2. generator
+<pre>
+jssh password-generator.js
+</pre>
+it will output like follow:
+<pre>
+096cf31121c4191378302341b8098fbef863a7942013fa8a7e73122f91c083d17042bf5b71a19fd8a877b0aa1b8ea453b7125adf92c037a5cf6920894df8fa3afe4928584115699464337529f7d68469921440642a58b8561a08af40426914996352148bdbd89743a622a54bb3e5b3a734d04cc403c7a6631f3cbf2535607f1c
+</pre>
