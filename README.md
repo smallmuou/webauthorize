@@ -19,15 +19,8 @@
     
 ## Note
 The latest web site use rsa. You need use [jssh](https://github.com/smallmuou/jssh) to generator password.
-1. edit password-generator.js
 <pre>
-...
-var str = encryptedPwd("<password>");
-print (str);
-</pre>
-2. generator
-<pre>
-jssh password-generator.js
+jssh password-generator.js < your password>
 </pre>
 it will output like follow:
 <pre>
