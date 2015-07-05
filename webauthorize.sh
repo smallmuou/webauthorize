@@ -58,6 +58,7 @@ Logout:
     $0
     $0 -p yourip
 
+password: Please use jssh password-generator.js <your password> to encrypt.
 Note: For now this command only support Linux and MacOSX.
 EOF
 }

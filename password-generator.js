@@ -705,5 +705,5 @@ function decryptedString(key, s)
     return result;
 }
 
-var str = encryptedPwd("<you password here>");
+var str = encryptedPwd($1);
 print (str);
